@@ -1,10 +1,10 @@
 const Agenda = require('agenda');
 
-const { MONGO_URL } = process.env;
+const { MONGO_URL, DB_COLLECTION } = process.env;
 
 const agenda = new Agenda({
   db: {
-    address: MONGO_URL
+    address: `${MONGO_URL}/${DB_COLLECTION}`
   }
 });
 
