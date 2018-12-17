@@ -12,12 +12,17 @@ $ npm install
 - Set environment variables
 
 ```
-MONGO_URL='mongodb://<my-mongo-url>/<database-name>'
+PORT=3000-or-change-it
+MONGO_URL=mongodb://<my-mongo-url>
+DB_COLLECTION=<database-name>
 ORGANIZATION_EMAIL=your-organization@mail.com
 ORGANIZATION_NAME='My Organization'
+ORGANIZATION_URL=https://organization.org
+ORGANIZATION_API_URL=https://api.organization.org
 NODEMAILER_HOST=your.host.com
 NODEMAILER_PASS=yourservicemailpass
 NODEMAILER_USER=yourservice@mail.com
+BULK_EMAIL_CHUNK_SIZE=100-or-change-it
 NODE_ENV=production || development
 ```
 
