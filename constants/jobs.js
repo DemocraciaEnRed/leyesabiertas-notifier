@@ -1,3 +1,4 @@
 module.exports = [
-  'send-email'
-];
+  'send-email',
+  'document-closes'
+]

@@ -1,109 +1,55 @@
-const React = require('react');
-const { Email, Item, Span, A, renderEmail, Box, Image } = require ('react-html-email');
-const { ORGANIZATION_NAME, ORGANIZATION_URL } = process.env;
-const spanStyles = {
-  fontSize: 16,
-  fontWeight: 'bold',
-}
-const pStyle = {
-  width: 317,
-  height: 25,
-  fontSize: 20,
-  lineHeight: 1.25,
-  textAlign: 'center',
-  color: '#101a21',
-}
-const mailStyle = {
-  width: 586,
-  height: 347,
-  fontSize: 16,
-  lineHeight: 25,
-  color: '#203340',
-}
-
-const HomeLink = () => <A href={process.env.ORGANIZATION_URL}>{process.env.ORGANIZATION_NAME}</A>
+const React = require('react')
+const { Email, Item, Span, A, renderEmail, Box, Image } = require('react-html-email')
+const MailHeader = require('./header')
+const MailFooter = require('./footer')
+const Content = require('./content')
+const Style = require('./styles')
+const CommentContainerStyle = require('./commentContainerStyle')
+const { ORGANIZATION_NAME, ORGANIZATION_URL, ORGANIZATION_API_URL } = process.env
 
 const CommentLiked = (props) => {
-
   return (
-    <Email>
-      <Box align="center" style={{width: '100%', height: 136}}>
-        <Item align="center" style={{border: 'solid 1px #e9e9e9'}}>
-          <Image src='https://www.hcdn.gob.ar/system/modules/ar.gob.hcdn.frontend/resources/img/logo-hcdn-vertical.jpg' align="center" style={{width: 130, height: 98, margin: 25}} />
-        </Item>
-
-        <Item align="center" style={{display: "block", marginTop: 25, marginLeft: 191, marginRight: 191}}>
-          <Span {...pStyle}>Portal de <Span style={{fontWeight: 'bold', fontSize: 20}}>Co-creación Legislativa</Span></Span>
-        </Item>
-
-        <Item style={{display: "block", maxWidth: 700, margin: '40px auto 0'}}>
-          <Span {...spanStyles}>
-            Hola {props.participant.fullname},
+    <Email title='Tu comentario fue marcado como relevante' style={{ width: '100%', maxWidth: '700px' }}>
+      <MailHeader />
+      <Content name={props.author.name} style={{ width: '100%' }}>
+        <Item style={Style.itemStyle}>
+          <Span {...Style.defaultContentStyle}>
+          El/la diputado/a apoyó el comentario que realizó en el proyecto <b>{props.document.title}</b> en <A href={`${ORGANIZATION_URL}/proyecto?id=${props.document.id}`}>{ORGANIZATION_NAME}</A>
           </Span>
-          <Box style={{marginTop: 30}}>
-            <Item>
-              <Span {...mailStyle}>
-                {
-                  (props.accountable.gender === 'Femenino'
-                  ? 'La diputada '
-                  : props.accountable.gender === 'Masculino'
-                    ? 'El diputado '
-                    : 'El/la diputado/a ') + props.accountable.fullname + ' '
-                }
-                apoyó el comentario que realizó en la propuesta de { props.title && props.title.toLowerCase() } en <HomeLink />.
-              </Span>
-            </Item>
-          </Box>
-          <Box style={{marginTop: 20}}>
-            <Item>
-              <Span {...mailStyle}>Este fue tu comentario:</Span>
-            </Item>
-          </Box>
         </Item>
-
-        <Box align="center" style={{border: 'solid 1px #dae1e7', width: 585, height:130, marginTop: 20}}>
-          <Item>
-            <Box style={{width: 50, height: 140, backgroundColor: '#f2f5f8'}}>
+        <Item style={Style.itemStyle}>
+          <Span {...Style.defaultContentStyle}>
+          Este fue tu comentario:
+          </Span>
+        </Item>
+        <Item style={Style.itemStyle}>
+          <A href={`${ORGANIZATION_URL}/proyecto?id=${props.document.id}`} textDecoration='none'>
+            <Box align='center' style={CommentContainerStyle.cardStyle}>
               <Item>
-                <Box style={{marginBottom: 77, marginLeft: 14}}>
-                  <Item>
-                    <Image src="https://complejoteatral.blob.core.windows.net/assets/like.png" style={{width: 24.7, height: 24.7}}/>
-                  </Item>
-                </Box>
+                <div style={CommentContainerStyle.leftColumn} >
+                  <Image src={`${ORGANIZATION_URL}/static/assets/emails/like.png`} style={CommentContainerStyle.cardIconImg} />
+                </div>
+                <div style={CommentContainerStyle.cardContentStyle}>
+                  <div style={CommentContainerStyle.userContainerStyle}>
+                    <Span {...CommentContainerStyle.userNameStyle}>
+                      <Image src={`${ORGANIZATION_API_URL}/api/v1/users/${props.author.id}`} style={CommentContainerStyle.userAvatarStyle} />
+                      {props.author.fullname}
+                    </Span>
+                  </div>
+                  <div>
+                    <Span {...CommentContainerStyle.theCommentStyle}>
+                      {props.comment.content}
+                    </Span>
+                  </div>
+                </div>
               </Item>
             </Box>
-            <Box align="center" style={{marginLeft: 80, marginTop: 16}}>
-              <Item >
-                <Span style={{ fontSize: 14, fontWeight: 'bold', color: '#2c4c61'}}>
-                  {props.participant.fullname}
-                </Span>
-              </Item>
-              <Item>
-                <Span style={{ fontSize: 12, color: '#5c97bc' }}>
-                  {props.participant.occupation && props.participant.occupation.toUpperCase()}
-                </Span>
-              </Item>
-            </Box>
-            <Box align="center" style={{marginLeft: 80, marginTop: 20, marginBottom: 22}}>
-              <Item>
-                <Span style={{fontSize: 14}}>{props.comment}</Span>
-              </Item>
-            </Box>
-          </Item>
-        </Box>
-
-        <Box align="center" style={{width: '100%', height: 126, marginTop: 49, borderBottom: 'solid 1px #e9e9e9', backgroundColor: '#5c98bd'}}>
-          <Item>
-            <Box align="center">
-              <Item align="center" style={{width: 535, height: 40, margin: 82}}>
-                <Span style={{color: 'white', fontSize: 13}}>Honorable Cámara de Diputados de la Nación Argentina | Congreso de la Nación Argentina | Av. Rivadavia 1864 - Ciudad Autónoma de Bs. As. (C.P.C1033AAV) | (54-11) 4127-7100</Span>
-              </Item>
-            </Box>
-          </Item>
-        </Box>
-      </Box>
+          </A>
+        </Item>
+      </Content>
+      <MailFooter />
     </Email>
-  );
+  )
 }
 
-module.exports = (props) => renderEmail(<CommentLiked {...props}/>);
+module.exports = (props) => renderEmail(<CommentLiked {...props} />)
