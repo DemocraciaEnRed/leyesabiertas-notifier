@@ -1,7 +1,6 @@
+const { ObjectID } = require('mongodb')
 const mailer = require('../../../services/nodemailer')
 const mongo = require('../../../services/db')
-const notifications = require('../../../core/notification-strategies')
-const { ObjectID } = require('mongodb')
 const {
   NODE_ENV,
   ORGANIZATION_NAME,
@@ -32,9 +31,7 @@ function buildTemplate (fileName, props) {
 
 module.exports = (agenda) => {
   agenda.define('document-closes', async (job, done) => {
-    const {
-      document
-    } = job.attrs.data
+    const document = job.attrs.data
 
     let documentInfo = await mongo.getDB().collection('documents').aggregate([
       { $match: { _id: ObjectID(document.id) } },
@@ -89,7 +86,7 @@ module.exports = (agenda) => {
     // Get emails from Likes
     // Get Likes from each comment
     const getLikesOfCommentsResults = await mongo.getDB().collection('comments').aggregate([
-      { $match: { document: ObjectID(document.id) } },
+      { $match: { document: document.id } },
       {
         $lookup: {
           from: 'likes',
@@ -129,7 +126,7 @@ module.exports = (agenda) => {
     })
     // -----------
     // Merge Emails
-    // let emailsToSend = arrayUnique(emailsWhoCommented.concat(emailsWhoLiked))
+    let emailsToSend = arrayUnique(emailsWhoCommented.concat(emailsWhoLiked))
     let emailProps = {
       document: {
         id: documentInfo._id,
@@ -150,11 +147,9 @@ module.exports = (agenda) => {
       }
     }
     const template = buildTemplate('comment-closed', emailProps)
-    let emailsToSend = ['guillermocroppi@gmail.com', 'g.croppi@hotmail.com']
     let i, j
     for (i = 0, j = emailsToSend.length; i < j; i += BULK_EMAIL_CHUNK_SIZE) {
       let emailsFor = emailsToSend.slice(i, i + BULK_EMAIL_CHUNK_SIZE)
-      console.log(emailsFor)
       let emailOptions = {
         from: `"${ORGANIZATION_NAME}" <${ORGANIZATION_EMAIL}>`, // sender address
         bcc: emailsFor, // list of receivers
