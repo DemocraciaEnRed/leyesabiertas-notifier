@@ -5,11 +5,9 @@ exports.post = async (req, res) => {
   try {
     let executionDate = new Date(req.body.closingDate)
     executionDate.setHours(23, 59, 59)
-    let document = {
-      id: req.body.id
-    }
-    await agenda.cancel({ name: 'document-closes', 'data.document.id': document.id })
-    await agenda.schedule(executionDate, 'document-closes', { document })
+    let document = req.body
+    await agenda.cancel({ name: 'document-closes', 'data.id': document.id })
+    await agenda.schedule(executionDate, 'document-closes', document)
     res.status(OK).json({
       message: 'Closing event scheduled'
     })
