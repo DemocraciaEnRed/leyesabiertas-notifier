@@ -37,7 +37,8 @@ exports.post = async (req, res) => {
       author: {
         id: commentInfo[0].user[0]._id,
         name: commentInfo[0].user[0].name,
-        fullname: commentInfo[0].user[0].fullname
+        fullname: commentInfo[0].user[0].fullname,
+        email: commentInfo[0].user[0].email
       },
       document: {
         id: commentInfo[0].document,
