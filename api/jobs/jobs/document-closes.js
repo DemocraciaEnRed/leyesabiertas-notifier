@@ -141,10 +141,12 @@ module.exports = (agenda) => {
     }
     const config = {
       host: NODEMAILER_HOST,
-      auth: {
-        user: NODEMAILER_USER,
-        pass: NODEMAILER_PASS
-      }
+      secure: false,
+      port: 25
+      // auth: {
+      //   user: NODEMAILER_USER,
+      //   pass: NODEMAILER_PASS
+      // }
     }
     const template = buildTemplate('comment-closed', emailProps)
     let i, j

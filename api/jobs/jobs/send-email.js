@@ -17,10 +17,8 @@ module.exports = (agenda) => {
 
     const config = {
       host: NODEMAILER_HOST,
-      auth: {
-        user: NODEMAILER_USER,
-        pass: NODEMAILER_PASS
-      }
+      secure: false,
+      port: 25
     }
 
     const emailOptions = {
