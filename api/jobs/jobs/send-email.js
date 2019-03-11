@@ -25,7 +25,7 @@ module.exports = (agenda) => {
     }
 
     const emailOptions = {
-      from: `"${ORGANIZATION_NAME}" <${ORGANIZATION_EMAIL}>`, // sender address
+      from: `${ORGANIZATION_EMAIL}`, // sender address
       to, // list of receivers
       subject, // Subject line
       html: template // html body

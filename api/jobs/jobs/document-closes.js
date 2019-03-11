@@ -156,7 +156,7 @@ module.exports = (agenda) => {
     for (i = 0, j = emailsToSend.length; i < j; i += BULK_EMAIL_CHUNK_SIZE) {
       let emailsFor = emailsToSend.slice(i, i + BULK_EMAIL_CHUNK_SIZE)
       let emailOptions = {
-        from: `"${ORGANIZATION_NAME}" <${ORGANIZATION_EMAIL}>`, // sender address
+        from: `${ORGANIZATION_EMAIL}`, // sender address
         bcc: emailsFor, // list of receivers
         subject: '¡Proyecto cerrado!', // Subject line
         html: template // html body
