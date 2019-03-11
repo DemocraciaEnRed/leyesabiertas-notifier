@@ -19,7 +19,9 @@ module.exports = (agenda) => {
       host: NODEMAILER_HOST,
       secure: false,
       ignoreTLS: true,
-      port: 25
+      port: 25,
+      logger: true,
+      debug: true
     }
 
     const emailOptions = {
