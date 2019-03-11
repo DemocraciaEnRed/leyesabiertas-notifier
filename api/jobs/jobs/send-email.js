@@ -12,20 +12,27 @@ module.exports = (agenda) => {
       NODEMAILER_HOST,
       NODEMAILER_USER,
       NODEMAILER_PASS,
+      NODEMAILER_PORT,
+      NODEMAILER_SECURE,
       ORGANIZATION_NAME,
       ORGANIZATION_EMAIL } = process.env
 
-    const config = {
+    let config = {
       host: NODEMAILER_HOST,
-      secure: false,
-      ignoreTLS: true,
-      port: 25,
-      logger: true,
-      debug: true
+      port: NODEMAILER_PORT
+    }
+    if (NODEMAILER_SECURE) {
+      config.auth = {
+        user: NODEMAILER_USER,
+        pass: NODEMAILER_PASS
+      }
+    } else {
+      config.secure = false
+      config.ignoreTLS = true
     }
 
     const emailOptions = {
-      from: `${ORGANIZATION_EMAIL}`, // sender address
+      from: `"${ORGANIZATION_NAME}" <${ORGANIZATION_EMAIL}>`, // sender address
       to, // list of receivers
       subject, // Subject line
       html: template // html body

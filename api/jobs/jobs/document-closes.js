@@ -8,7 +8,9 @@ const {
   BULK_EMAIL_CHUNK_SIZE,
   NODEMAILER_HOST,
   NODEMAILER_USER,
-  NODEMAILER_PASS
+  NODEMAILER_PASS,
+  NODEMAILER_PORT,
+  NODEMAILER_SECURE
 } = process.env
 const basePath = NODE_ENV === 'production' ? '../../../dist/templates' : '../../../templates'
 
@@ -139,24 +141,25 @@ module.exports = (agenda) => {
         fullname: documentInfo.author[0].fullname
       }
     }
-    const config = {
+    let config = {
       host: NODEMAILER_HOST,
-      secure: false,
-      ignoreTLS: true,
-      port: 25,
-      logger: true,
-      debug: true
-      // auth: {
-      //   user: NODEMAILER_USER,
-      //   pass: NODEMAILER_PASS
-      // }
+      port: NODEMAILER_PORT
+    }
+    if (NODEMAILER_SECURE) {
+      config.auth = {
+        user: NODEMAILER_USER,
+        pass: NODEMAILER_PASS
+      }
+    } else {
+      config.secure = false
+      config.ignoreTLS = true
     }
     const template = buildTemplate('comment-closed', emailProps)
     let i, j
     for (i = 0, j = emailsToSend.length; i < j; i += BULK_EMAIL_CHUNK_SIZE) {
       let emailsFor = emailsToSend.slice(i, i + BULK_EMAIL_CHUNK_SIZE)
       let emailOptions = {
-        from: `${ORGANIZATION_EMAIL}`, // sender address
+        from: `"${ORGANIZATION_NAME}" <${ORGANIZATION_EMAIL}>`, // sender address
         bcc: emailsFor, // list of receivers
         subject: '¡Proyecto cerrado!', // Subject line
         html: template // html body
