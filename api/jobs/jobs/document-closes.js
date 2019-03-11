@@ -142,6 +142,7 @@ module.exports = (agenda) => {
     const config = {
       host: NODEMAILER_HOST,
       secure: false,
+      ignoreTLS: true,
       port: 25
       // auth: {
       //   user: NODEMAILER_USER,
