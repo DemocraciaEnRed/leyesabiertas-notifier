@@ -73,7 +73,7 @@ const CommentClosed = (props) => {
           </Span>
         </Item>
         <Item style={Style.itemStyle}>
-          <A href={`${ORGANIZATION_URL}/proyecto?id=${props.document.id}`} textDecoration='none'>
+          <A href={`${ORGANIZATION_URL}/propuesta?id=${props.document.id}`} textDecoration='none'>
             <Box align='center' style={cardStyle}>
               <Item>
                 <Image src={props.document.imageCover} style={cardImgStyle} />
