@@ -46,7 +46,8 @@ exports.post = async (req, res) => {
       },
       comment: {
         content: commentInfo[0].content
-      }
+      },
+      reply: commentInfo[0].reply || null
     }
     // Send notification
     notification.sendEmail(type, emailProps)
