@@ -18,59 +18,60 @@ const basePath = NODE_ENV === 'production' ? '../../dist/templates' : '../../tem
 //   return a
 // }
 
-// function buildTemplate (fileName, props) {
-//   const path = `${basePath}/${fileName}`
-//   const reactTemplate = require(path)
+function buildTemplate (fileName, props) {
+  const path = `${basePath}/${fileName}`
+  const reactTemplate = require(path)
 
-//   return reactTemplate({ ...props })
-// }
+  return reactTemplate({ ...props })
+}
 
 router.post('/test', async (req, res, next) => {
   try {
-    // const { type, comment } = req.body
-    // let commentInfo = await mongo.getDB().collection('comments').aggregate([
-    //   { $match: { _id: ObjectID(comment) } },
-    //   {
-    //     $lookup: {
-    //       from: 'users',
-    //       localField: 'user',
-    //       foreignField: '_id',
-    //       as: 'user'
-    //     }
-    //   },
-    //   {
-    //     $lookup: {
-    //       from: 'documentversions',
-    //       localField: 'version',
-    //       foreignField: '_id',
-    //       as: 'version'
-    //     }
-    //   },
-    //   { $project: {
-    //     'user.avatar': 0,
-    //     'version.content.fundation': 0,
-    //     'version.content.articles': 0,
-    //     'decoration': 0
-    //   }
-    //   }
-    // ]).toArray()
-    // let emailProps = {
-    //   author: {
-    //     id: commentInfo[0].user[0]._id,
-    //     name: commentInfo[0].user[0].name,
-    //     fullname: commentInfo[0].user[0].fullname,
-    //     email: commentInfo[0].user[0].email
-    //   },
-    //   document: {
-    //     id: commentInfo[0].document,
-    //     title: commentInfo[0].version[0].content.title
-    //   },
-    //   comment: {
-    //     content: commentInfo[0].content
-    //   }
-    // }
-    // const template = buildTemplate(type, emailProps)
-    // res.send(template)
+    const { type, comment } = req.body
+    let commentInfo = await mongo.getDB().collection('comments').aggregate([
+      { $match: { _id: ObjectID(comment) } },
+      {
+        $lookup: {
+          from: 'users',
+          localField: 'user',
+          foreignField: '_id',
+          as: 'user'
+        }
+      },
+      {
+        $lookup: {
+          from: 'documentversions',
+          localField: 'version',
+          foreignField: '_id',
+          as: 'version'
+        }
+      },
+      { $project: {
+        'user.avatar': 0,
+        'version.content.fundation': 0,
+        'version.content.articles': 0,
+        'decoration': 0
+      }
+      }
+    ]).toArray()
+    let emailProps = {
+      author: {
+        id: commentInfo[0].user[0]._id,
+        name: commentInfo[0].user[0].name,
+        fullname: commentInfo[0].user[0].fullname,
+        email: commentInfo[0].user[0].email
+      },
+      document: {
+        id: commentInfo[0].document,
+        title: commentInfo[0].version[0].content.title
+      },
+      comment: {
+        content: commentInfo[0].content
+      },
+      reply: commentInfo[0].reply || null
+    }
+    const template = buildTemplate(type, emailProps)
+    res.send(template)
   } catch (err) {
     res.status(INTERNAL_SERVER_ERROR).json({
       message: 'An error ocurred',

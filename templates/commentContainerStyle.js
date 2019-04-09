@@ -52,3 +52,18 @@ module.exports.theCommentStyle = {
   lineHeight: 16,
   fontSize: 12
 }
+
+module.exports.theReplyStyle = {
+  lineHeight: 16,
+  fontSize: 12
+}
+
+module.exports.replyContainerStyle = {
+  marginLeft: 10,
+  marginTop: 10,
+  paddingLeft: 10,
+  paddingTop: 5,
+  paddingBottom: 5,
+  borderLeft: '1px solid #CCC',
+  whiteSpace: 'pre-wrap'
+}

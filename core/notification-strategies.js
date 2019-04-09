@@ -29,6 +29,11 @@ const commentLiked = (info) => {
   execute(info.author.email, '¡Comentario relevante!', template)
 }
 
+const commentReplied = (info) => {
+  const template = buildTemplate('comment-replied', info)
+  execute(info.author.email, '¡Comentario respondido!', template)
+}
+
 const commentContribution = (info) => {
   const template = buildTemplate('comment-contribution', info)
   execute(info.author.email, '¡Comentario marcado como aporte!', template)
@@ -37,6 +42,7 @@ const commentContribution = (info) => {
 const strategies = [
   ['comment-resolved', commentResolved],
   ['comment-liked', commentLiked],
+  ['comment-replied', commentReplied],
   ['comment-contribution', commentContribution]
 ]
 
