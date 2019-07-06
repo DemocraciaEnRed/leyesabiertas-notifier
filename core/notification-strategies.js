@@ -19,6 +19,11 @@ const buildTemplate = (fileName, props) => {
   return reactTemplate({ ...props })
 }
 
+const commentNew = (info) => {
+  const template = buildTemplate('comment-new', info)
+  execute(info.authorDocument, '¡Comentario nuevo!', template)
+}
+
 const commentResolved = (info) => {
   const template = buildTemplate('comment-resolved', info)
   execute(info.author.email, '¡Comentario resuelto!', template)
@@ -40,6 +45,7 @@ const commentContribution = (info) => {
 }
 
 const strategies = [
+  ['comment-new', commentNew],
   ['comment-resolved', commentResolved],
   ['comment-liked', commentLiked],
   ['comment-replied', commentReplied],

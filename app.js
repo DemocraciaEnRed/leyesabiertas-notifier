@@ -6,6 +6,7 @@ require('dotenv').config()
 
 const sendEmailRoutes = require('./api/routes/send-email')
 const setCloseEvent = require('./api/routes/document-closes')
+const setNewCommentEvent = require('./api/routes/comment-new')
 
 const { NODE_ENV } = process.env
 
@@ -27,6 +28,7 @@ app.use((req, res, next) => {
 
 app.use('/api/send-email', sendEmailRoutes)
 app.use('/api/set-document-closes', setCloseEvent)
+app.use('/api/comment-new', setNewCommentEvent)
 
 if (NODE_ENV === 'development') app.use('/views', require('./api/routes/dev-view'))
 

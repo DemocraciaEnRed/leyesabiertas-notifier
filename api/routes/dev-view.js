@@ -40,38 +40,49 @@ router.post('/test', async (req, res, next) => {
       },
       {
         $lookup: {
-          from: 'documentversions',
-          localField: 'version',
+          from: 'documents',
+          localField: 'document',
           foreignField: '_id',
-          as: 'version'
+          as: 'document'
+        }
+      },
+      {
+        $lookup: {
+          from: 'users',
+          localField: 'document.author',
+          foreignField: '_id',
+          as: 'author'
         }
       },
       { $project: {
         'user.avatar': 0,
+        'author.avatar': 0,
         'version.content.fundation': 0,
         'version.content.articles': 0,
         'decoration': 0
       }
       }
     ]).toArray()
-    let emailProps = {
-      author: {
-        id: commentInfo[0].user[0]._id,
-        name: commentInfo[0].user[0].name,
-        fullname: commentInfo[0].user[0].fullname,
-        email: commentInfo[0].user[0].email
-      },
-      document: {
-        id: commentInfo[0].document,
-        title: commentInfo[0].version[0].content.title
-      },
-      comment: {
-        content: commentInfo[0].content
-      },
-      reply: commentInfo[0].reply || null
-    }
-    const template = buildTemplate(type, emailProps)
-    res.send(template)
+    // console.log(commentInfo[0].document[0])
+    // let emailProps = {
+    //   author: {
+    //     id: commentInfo[0].user[0]._id,
+    //     name: commentInfo[0].user[0].name,
+    //     fullname: commentInfo[0].user[0].fullname,
+    //     email: commentInfo[0].user[0].email
+    //   },
+    //   document: {
+    //     id: commentInfo[0].document,
+    //     title: commentInfo[0].document[0].author
+    //   },
+    //   comment: {
+    //     content: commentInfo[0].content
+    //   },
+    //   reply: commentInfo[0].reply || null
+    // }
+    res.send(commentInfo[0])
+    // const template = buildTemplate(type, emailProps)
+    // res.send(template)
   } catch (err) {
     res.status(INTERNAL_SERVER_ERROR).json({
       message: 'An error ocurred',
