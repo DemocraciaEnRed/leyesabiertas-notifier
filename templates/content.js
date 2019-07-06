@@ -13,12 +13,12 @@ const Content = (props) => {
           props.showName === undefined
             ? <Item style={Styles.itemStyle}>
               <Span {...Styles.defaultContentStyle}>
-                <b>Hola {props.name}</b>,
+                <b>Hola</b>,
               </Span>
             </Item>
             : props.showName && <Item style={Styles.itemStyle}>
               <Span {...Styles.defaultContentStyle}>
-                <b>Hola {props.name}</b>,
+                <b>Hola</b>,
               </Span>
             </Item>
         }
