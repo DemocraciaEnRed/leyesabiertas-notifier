@@ -24,8 +24,25 @@ exports.post = async (req, res) => {
           as: 'version'
         }
       },
+      {
+        $lookup: {
+          from: 'documents',
+          localField: 'document',
+          foreignField: '_id',
+          as: 'document'
+        }
+      },
+      {
+        $lookup: {
+          from: 'users',
+          localField: 'document.author',
+          foreignField: '_id',
+          as: 'author'
+        }
+      },
       { $project: {
         'user.avatar': 0,
+        'author.avatar': 0,
         'version.content.fundation': 0,
         'version.content.articles': 0,
         'decoration': 0
@@ -47,7 +64,8 @@ exports.post = async (req, res) => {
       comment: {
         content: commentInfo[0].content
       },
-      reply: commentInfo[0].reply || null
+      reply: commentInfo[0].reply || null,
+      authorDocument: commentInfo[0].author[0].email
     }
     // Send notification
     notification.sendEmail(type, emailProps)

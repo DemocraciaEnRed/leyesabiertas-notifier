@@ -1,6 +1,6 @@
 {
   "name": "democracyos-api-notifier",
-  "version": "1.0.0",
+  "version": "1.3.0",
   "description": "API Notifications",
   "main": "server.js",
   "scripts": {
