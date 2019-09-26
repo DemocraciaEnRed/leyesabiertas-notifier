@@ -58,7 +58,7 @@ exports.post = async (req, res) => {
         email: commentInfo[0].user[0].email
       },
       document: {
-        id: commentInfo[0].document[0]._id,
+        id: commentInfo[0].document.id,
         title: commentInfo[0].version[0].content.title
       },
       comment: {

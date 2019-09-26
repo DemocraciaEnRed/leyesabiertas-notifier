@@ -1,5 +1,13 @@
 # CHANGELOG
 
+### 1.5.0
+
+* Se hizo un FIX sobre un ID que provocaba que en algunos casos no se enviarán algunas  notificaciones
+
+Compatible con:
+* `leyesabiertas-core:1.5.0`
+* `leyesabiertas-web:1.5.0`
+
 ### 1.3.0
 
 * Se hizo un FIX donde el link a la propuesta se parseaba como `Object` y habia que sacar el `id`
