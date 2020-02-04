@@ -13,8 +13,11 @@ const cardStyle = {
   position: 'relative'
 }
 
-const cardImgStyle = {
-  width: '100%'
+const noImageStyle = {
+  width: '100%',
+  height: '126px',
+  backgroundColor: '#1b95ba',
+  overflow: 'hidden'
 }
 
 const cardLabelStyle = {
@@ -60,6 +63,19 @@ const commentIconStyle = {
   verticalAlign: 'middle'
 }
 
+function getImageStyle(imgUrl) {
+
+  return {
+    width: '100%',
+    height: '126px',
+    backgroundColor: '#1b95ba',
+    backgroundImage: `url(${imgUrl})`,
+    overflow: 'hidden',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center'
+  }
+}
+
 const titleStyle = { fontSize: 24, fontWeight: 'bold', lineHeight: 'normal' }
 
 const CommentClosed = (props) => {
@@ -69,14 +85,18 @@ const CommentClosed = (props) => {
       <Content showName={false} style={{ width: '100%' }}>
         <Item style={Style.itemStyle}>
           <Span {...Style.defaultContentStyle}>
-          Finalizó el periodo para realizar aportes en el proyecto <b>{props.document.title}</b> en la que participó. Ingrese en <A href={ORGANIZATION_URL}>{ORGANIZATION_NAME}</A> para ver la versión final y los resultados del proceso de co-creación de normas.
+            Finalizó el periodo para realizar aportes en el proyecto <b>{props.document.title}</b> en la que participó. Ingrese en <A href={ORGANIZATION_URL}>{ORGANIZATION_NAME}</A> para ver la versión final y los resultados del proceso de co-creación de normas.
           </Span>
         </Item>
         <Item style={Style.itemStyle}>
           <A href={`${ORGANIZATION_URL}/propuesta?id=${props.document.id}`} textDecoration='none'>
             <Box align='center' style={cardStyle}>
               <Item>
-                <Image src={props.document.imageCover} style={cardImgStyle} />
+                {
+                  props.document.imageCover ?
+                    <Box style={getImageStyle(props.document.imageCover)} /> :
+                    <Box style={noImageStyle} />
+                }
                 <Box style={cardLabelStyle}>
                   <Item>
                     <Span style={titleStyle}>{props.document.title}</Span>
@@ -91,7 +111,7 @@ const CommentClosed = (props) => {
               </Item>
               <Item style={commentsContainerStyle}>
                 <Span style={commentsLabelStyle}>
-                  <Image src={`${ORGANIZATION_URL}/static/assets/emails/comment.png`} style={commentIconStyle} />
+                  <Image src={`${ORGANIZATION_URL}/static/assets/email/comment-icon.png`} style={commentIconStyle} />
                   <b>{props.document.commentsCount}</b> COMENTARIOS
                 </Span>
               </Item>

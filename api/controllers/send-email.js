@@ -6,6 +6,7 @@ const notification = require('../../core/notification-strategies')
 exports.post = async (req, res) => {
   try {
     const { type, comment } = req.body
+    console.log(req.body)
     let commentInfo = await mongo.getDB().collection('comments').aggregate([
       { $match: { _id: ObjectID(comment) } },
       {
@@ -33,6 +34,8 @@ exports.post = async (req, res) => {
       }
     ]).toArray()
     // Prepare email props
+    console.log(commentInfo[0].document.id.toString())
+
     let emailProps = {
       author: {
         id: commentInfo[0].user[0]._id,
@@ -41,7 +44,7 @@ exports.post = async (req, res) => {
         email: commentInfo[0].user[0].email
       },
       document: {
-        id: commentInfo[0].document[0]._id,
+        id: commentInfo[0].document.toString(),
         title: commentInfo[0].version[0].content.title
       },
       comment: {

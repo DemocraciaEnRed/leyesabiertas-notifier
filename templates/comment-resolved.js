@@ -19,7 +19,7 @@ const CommentRead = (props) => {
         </Item>
         <Item style={Style.itemStyle}>
           <Span {...Style.defaultContentStyle}>
-          Este fue tu comentario:
+          Este fue tú comentario:
           </Span>
         </Item>
         <Item style={Style.itemStyle}>
@@ -27,7 +27,7 @@ const CommentRead = (props) => {
             <Box align='center' style={CommentContainerStyle.cardStyle}>
               <Item>
                 <div style={CommentContainerStyle.leftColumn} >
-                  <Image src={`${ORGANIZATION_URL}/static/assets/emails/check.png`} style={CommentContainerStyle.cardIconImg} />
+                  <Image src={`${ORGANIZATION_URL}/static/assets/email/check.png`} style={CommentContainerStyle.cardIconImg} />
                 </div>
                 <div style={CommentContainerStyle.cardContentStyle}>
                   <div style={CommentContainerStyle.userContainerStyle}>

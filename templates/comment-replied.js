@@ -22,7 +22,7 @@ const CommentRead = (props) => {
             <Box align='center' style={CommentContainerStyle.cardStyle}>
               <Item>
                 <div style={CommentContainerStyle.leftColumn} >
-                  <Image src={`${ORGANIZATION_URL}/static/assets/emails/check.png`} style={CommentContainerStyle.cardIconImg} />
+                  <Image src={`${ORGANIZATION_URL}/static/assets/email/comment-icon.png`} style={CommentContainerStyle.cardIconImg} />
                 </div>
                 <div style={CommentContainerStyle.cardContentStyle}>
                   <div style={CommentContainerStyle.userContainerStyle}>

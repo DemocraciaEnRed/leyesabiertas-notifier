@@ -12,7 +12,7 @@ const MailFooter = (props) => {
         </Item>
         <Item align='center'>
           <Span {...Styles.textStyle}>
-            <b>Honorable Cámara de Diputados de la Nación Argentina</b> | Congreso de la Nación Argentina | Av. Rivadavia 1864 - Ciudad Autónoma de Bs. As. (C.P.C1033AAV) | (54-11) 4127-7100
+            <b>Honorable Cámara de Diputados de la Nación Argentina</b> | Congreso de la Nación Argentina | Av. Rivadavia 1864 - Ciudad Autónoma de Bs. As. (C.P.C1033AAV) | (+5411) 6075-7100
           </Span>
         </Item>
       </Box>
