@@ -1,5 +1,17 @@
 # CHANGELOG
 
+### 1.7.1
+
+* Corregido el path de varios iconos que no apuntaban correctamente
+* Corregido el error que habia que evitaba que se manden los siguientes correos: Nuevo comentario, Nueva respuesta, Comentario relevante, Comentario destacado, Comentario resuelto.
+* Corregido un error visual de como se veia la card del proyecto cuando contenia una imagen en el template de proyecto cerrado.
+* Cambiado el numero del telefono de diputados en el footer del email
+
+Compatible con:
+* `leyesabiertas-core:1.7.1`
+* `leyesabiertas-web:1.7.1`
+
+
 ### 1.5.0
 
 * Se hizo un FIX sobre un ID que provocaba que en algunos casos no se enviarán algunas  notificaciones
