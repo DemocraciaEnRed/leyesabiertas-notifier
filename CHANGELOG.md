@@ -1,5 +1,13 @@
 # CHANGELOG
 
+### 1.7.2
+
+* Corregido la URL de un avatar en el template de comment-contribution (cuando se marca un comentario como aporte)
+
+Compatible con:
+* `leyesabiertas-core:1.7.1`
+* `leyesabiertas-web:1.7.2`
+
 ### 1.7.1
 
 * Corregido el path de varios iconos que no apuntaban correctamente
