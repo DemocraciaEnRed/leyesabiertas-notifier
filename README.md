@@ -1,57 +1,68 @@
-# DemocracyOS API Notifier
+![Header](docs/header-doc.png)
 
-API Notifications with agenda and nodemailer
+# Leyes Abiertas - API Notifier (Mailer)
 
-## Configuration
-- Install dependencies
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=DemocraciaEnRed_leyesabiertas-notifier&metric=alert_status)](https://sonarcloud.io/dashboard?id=DemocraciaEnRed_leyesabiertas-notifier)
 
-```sh
-$ npm install
+
+Este es uno de los cuatros modulos que se requieren descargar, hacer setup e instalar cada uno de los repositorios para poder utilizar Leyes Abiertas.
+Para saber mas del conjunto de modulos que compone leyes abiertas, hace [click aqui](https://github.com/DemocraciaEnRed/leyesabiertas) 
+
+---
+
+### Setup leyesabiertas-notifier
+
+> #### ⚠️ NOTAS IMPORTANTES
+> 
+> El siguiente conjunto de sistemas requiere de:
+> - Mongo3.6
+> - Keycloak 4.4.x o 6.0.x
+> 
+> Sobre Mongo3.6, es necesario que instales mongo 3.6 en tu computadora, con una base de datos llamada "leyesabiertas". No hace falta crear alguna collection, eso lo hace la app en inicio.
+> 
+> Keycloak es un sistema open source de identificación y gestión de acceso de usuarios. Es un sistema complejo y para fines de testing, en [Democracia en Red](https://democraciaenred.org) sabemos que la instalacion de Keycloak puede ser un bloqueo para intenciones de testing. Para eso, comunicate con nosotros y podemos ayudarte a hacer el setup y utilizar nuestro Keycloak de Democracia en Red. Envianos un correo electronico en [mailto:it@democraciaenred.org](it@democraciaenred.org) o contactanos a través de nuestro [Twitter](https://twitter.com/fundacionDER).
+
+
+Ir a la carpeta del repo y instalar las dependencias.
+
+```
+dev/:$ cd leyesabiertas-notifier
+dev/leyesabiertas-notifier:$ npm install
 ```
 
-- Set environment variables
+Ahora tenemos que crear un archivo `.env` que son nuestras variables de entorno
 
-```
-PORT=3000-or-change-it
-MONGO_URL=mongodb://<my-mongo-url>
-DB_COLLECTION=<database-name>
-ORGANIZATION_EMAIL=your-organization@mail.com
-ORGANIZATION_NAME='My Organization'
-ORGANIZATION_URL=https://organization.org
-ORGANIZATION_API_URL=https://api.organization.org
-NODEMAILER_HOST=smtp.your.host.com
-NODEMAILER_PORT=465
-NODEMAILER_SECURE=true|false
-NODEMAILER_PASS=yourservicemailpass
-NODEMAILER_USER=yourservice@mail.com
+```env
+PORT=5000
+MONGO_URL=mongodb://localhost
+DB_COLLECTION=leyesabiertas
+ORGANIZATION_EMAIL=##############TODO
+ORGANIZATION_NAME=###############TODO
+ORGANIZATION_API_URL=http://localhost:4000
+NODEMAILER_HOST=##############TODO
+NODEMAILER_PASS=##############TODO
+NODEMAILER_USER=##############TODO
+NODEMAILER_PORT=##############TODO
+NODEMAILER_SECURE=true||false
+NODE_ENV=development || production
 BULK_EMAIL_CHUNK_SIZE=100-or-change-it
-NODE_ENV=production || development
 ```
 
-## React Templates
+Comando para ejecutar:
 
-To pre-build the templates for production purpose, run:
-
-```sh
-$ npm run build
+```
+dev/leyesabiertas-notifier:$ npm run dev
 ```
 
-This will create a "dist/templates" folder for the pre-build templates.
+#### ℹ Simple test
 
-## ¡Run server, run!
-
-```sh
-$ npm run dev
-```
-
-Server will run on port 3000.
-At the moment, try make a POST request to 
+Por el momento, intentá hacer un POST a...
 
 ```
 /api/sendemail
 ```
 
-with this body structure
+Con el siguiente body...
 
 ```javascript
 {
@@ -67,12 +78,10 @@ with this body structure
 }
 ```
 
-Currently there are three types of notifications: "comment-resolved", "comment-liked", "document-edited"
+Actualmente hay 3 tipos de notificaciones al momento: "comment-resolved", "comment-liked", "document-edited"
 
-## Testing
+---
 
-For test the api, run
+## Licencia
 
-```sh
-$ npm test
-```
+El siguiente repositorio es un desarrollo de codigo abierto bajo la licencia GNU General Public License v3.0. Pueden acceder a la haciendo [click aqui](./LICENSE).
