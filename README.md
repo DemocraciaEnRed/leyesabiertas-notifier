@@ -80,6 +80,9 @@ Con el siguiente body...
 
 Actualmente hay 3 tipos de notificaciones al momento: "comment-resolved", "comment-liked", "document-edited"
 
+Esto se puede realizar rápidamente editando el archivo `test-post-data.json` y ejecutando:
+`curl -v -H "Content-Type: application/json" -d @test-post-data.json http://localhost:5000/api/send-email`
+
 ---
 
 ## Licencia
