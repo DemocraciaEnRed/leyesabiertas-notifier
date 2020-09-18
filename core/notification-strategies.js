@@ -59,6 +59,7 @@ function sendEmail (type, info) {
     throw new Error("The type does'n exists.")
   }
 
+  console.log('core/notification-strategies.js: Sending mail of type', type)
   strategiesMap.get(type)(info)
 };
 
