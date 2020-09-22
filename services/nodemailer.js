@@ -7,6 +7,7 @@ module.exports.sendEmail = function sendEmail(config, mailOptions, done) {
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       console.log('services/nodemailer.js: Error sending mail')
+      console.log(error)
       return done(error);
     }
 
