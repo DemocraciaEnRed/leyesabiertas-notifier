@@ -44,12 +44,18 @@ const commentContribution = (info) => {
   execute(info.author.email, '¡Comentario marcado como aporte!', template)
 }
 
+const documentPublished = (info) => {
+  const template = buildTemplate('document-published', info)
+  execute(info.user.email, '¡Proyecto publicado!', template)
+}
+
 const strategies = [
   ['comment-new', commentNew],
   ['comment-resolved', commentResolved],
   ['comment-liked', commentLiked],
   ['comment-replied', commentReplied],
-  ['comment-contribution', commentContribution]
+  ['comment-contribution', commentContribution],
+  ['document-published', documentPublished]
 ]
 
 const strategiesMap = new Map(strategies)
