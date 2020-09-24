@@ -70,7 +70,7 @@ exports.post = async (req, res) => {
     // Buscamos todxs lxs usuarixs suscriptos a 1 o más de las etiquetas
     const users = await db.collection('users')
       .find({$and: [
-          {allowTagsMail: true},
+          {'fields.tagsNotification': true},
           {'fields.tags': {$in:  tagsIds}}
       ]}).toArray()
     log(`Found ${users.length} subscribed users (to all or some of document's tags)`)
