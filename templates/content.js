@@ -10,15 +10,15 @@ const Content = (props) => {
           <Span {...Styles.titleStyle}>Portal de <b>Leyes Abiertas</b></Span>
         </Item>
         {
-          props.showName === undefined
+          !props.showName || !props.name
             ? <Item style={Styles.itemStyle}>
               <Span {...Styles.defaultContentStyle}>
                 <b>Hola</b>,
               </Span>
             </Item>
-            : props.showName && <Item style={Styles.itemStyle}>
+            : <Item style={Styles.itemStyle}>
               <Span {...Styles.defaultContentStyle}>
-                <b>Hola</b>,
+                <b>Hola {props.name}</b>,
               </Span>
             </Item>
         }
