@@ -9,7 +9,7 @@ const { ORGANIZATION_NAME, ORGANIZATION_URL, ORGANIZATION_API_URL } = process.en
 
 const ApoyoValidacion = (props) => {
   const { documentTitle, token } = props
-  const validationUrl = `${ORGANIZATION_URL}/apoyo-anon-validar/${token.token}`
+  const validationUrl = `${ORGANIZATION_URL}/validar-apoyo?v=${token.token}`
   return (
     <Email title='Validación de apoyo' style={{ width: '100%', maxWidth: '700px' }}>
       <MailHeader />
