@@ -49,13 +49,19 @@ const documentPublished = (info) => {
   execute(info.user.email, '¡Proyecto publicado!', template)
 }
 
+const apoyoValidacion = (info) => {
+  const template = buildTemplate('apoyo-validacion', info)
+  execute(info.user.email, '¡Último paso para apoyar el proyecto de Leyes Abiertas!', template)
+}
+
 const strategies = [
   ['comment-new', commentNew],
   ['comment-resolved', commentResolved],
   ['comment-liked', commentLiked],
   ['comment-replied', commentReplied],
   ['comment-contribution', commentContribution],
-  ['document-published', documentPublished]
+  ['document-published', documentPublished],
+  ['apoyo-validacion', apoyoValidacion]
 ]
 
 const strategiesMap = new Map(strategies)

@@ -8,6 +8,7 @@ const sendEmailRoutes = require('./api/routes/send-email')
 const setCloseEvent = require('./api/routes/document-closes')
 const setNewCommentEvent = require('./api/routes/comment-new')
 const documentPublishedRoutes = require('./api/routes/document-published')
+const apoyoValidacionRoutes = require('./api/routes/apoyo-validacion')
 
 const { NODE_ENV } = process.env
 
@@ -31,6 +32,7 @@ app.use('/api/send-email', sendEmailRoutes)
 app.use('/api/set-document-closes', setCloseEvent)
 app.use('/api/comment-new', setNewCommentEvent)
 app.use('/api/document-published', documentPublishedRoutes)
+app.use('/api/apoyo-validacion', apoyoValidacionRoutes)
 
 if (NODE_ENV === 'development') app.use('/views', require('./api/routes/dev-view'))
 
