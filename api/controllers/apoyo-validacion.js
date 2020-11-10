@@ -48,7 +48,7 @@ exports.post = async (req, res) => {
     await notification.sendEmail('apoyo-validacion', {
       documentTitle: currentVersionObj.content.title,
       token,
-      user: { email: 'bungew@gmail.com' }
+      user: { email: token.email }
     })
 
     log('Apoyo validación mail scheduled')
