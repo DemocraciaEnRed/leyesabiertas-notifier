@@ -40,6 +40,13 @@ module.exports.defaultContentStyle = {
   lineHeight: '18px'
 }
 
+module.exports.smallContentStyle = {
+  fontFamily: 'sans-serif',
+  fontSize: '12px',
+  lineHeight: '15px',
+  color: '#CACACA'
+}
+
 module.exports.itemStyle = {
   paddingBottom: '10px'
 }

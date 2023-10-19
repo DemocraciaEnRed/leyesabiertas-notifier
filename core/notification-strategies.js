@@ -49,6 +49,11 @@ const documentPublished = (info) => {
   execute(info.user.email, '¡Proyecto publicado!', template)
 }
 
+const documentPopular = (info) => {
+  const template = buildTemplate('document-popular', info)
+  execute(info.user.email, '¡Un proyecto esta volviendose popular!', template)
+}
+
 const apoyoValidacion = (info) => {
   const template = buildTemplate('apoyo-validacion', info)
   execute(info.user.email, '¡Último paso para apoyar el proyecto de Leyes Abiertas!', template)
@@ -61,6 +66,7 @@ const strategies = [
   ['comment-replied', commentReplied],
   ['comment-contribution', commentContribution],
   ['document-published', documentPublished],
+  ['document-popular', documentPopular],
   ['apoyo-validacion', apoyoValidacion]
 ]
 
