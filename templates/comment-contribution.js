@@ -46,6 +46,13 @@ const CommentContribution = (props) => {
             </Box>
           </A>
         </Item>
+        <Item style={Style.itemStyle}>
+          <em>
+            <Span {...Style.smallContentStyle}>
+              Recibirá una notificación cada vez que un usuario participe en un proyecto de su autoría
+            </Span>
+          </em>
+        </Item>
       </Content>
       <MailFooter />
     </Email>

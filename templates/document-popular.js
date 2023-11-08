@@ -81,7 +81,7 @@ const titleStyle = { fontSize: 24, fontWeight: 'bold', lineHeight: 'normal' }
 
 const DocumentPopular = (props) => {
   return (
-    <Email title='Un proyecto se ha vuelto popular!' style={{ width: '100%', maxWidth: '700px' }}>
+    <Email title='Un proyecto está volviendose popular!' style={{ width: '100%', maxWidth: '700px' }}>
       <MailHeader />
       <Content name={props.user.name} style={{ width: '100%' }}>
 

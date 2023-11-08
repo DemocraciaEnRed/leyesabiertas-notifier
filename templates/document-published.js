@@ -63,13 +63,13 @@ const titleStyle = { fontSize: 24, fontWeight: 'bold', lineHeight: 'normal' }
 
 const DocumentPublished = (props) => {
   return (
-    <Email title='Proyecto publicado' style={{ width: '100%', maxWidth: '700px' }}>
+    <Email title='¡Nuevo proyecto publicado en Leyes Abiertas!' style={{ width: '100%', maxWidth: '700px' }}>
       <MailHeader />
       <Content name={props.user.name} style={{ width: '100%' }}>
 
         <Item style={Style.itemStyle}>
           <Span {...Style.defaultContentStyle}>
-            Se ha publicado un nuevo proyecto <b>{props.document.title}</b> de <b>{props.document.author}</b> en el <A href={`${ORGANIZATION_URL}/propuesta?id=${props.document.id}`}>{ORGANIZATION_NAME}</A>.
+            Te informamos que se ha publicado un nuevo proyecto de <b>{props.document.author}</b>: <b>{props.document.title}</b> en el <A href={`${ORGANIZATION_URL}/propuesta?id=${props.document.id}`}>{ORGANIZATION_NAME}</A>.
           </Span>
         </Item>
 
@@ -101,8 +101,7 @@ const DocumentPublished = (props) => {
         <Item style={Style.itemStyle}>
           <em>
             <Span {...Style.smallContentStyle}>
-              Usted está recibiendo esta notificación porque ha configurado para recibir notificaciones cuando un proyecto se publica con etiquetas de su interés o se ha suscripto al diputado autor del proyecto.
-              Si desea desactivar este tipo de notificación notificaciones o cambiar sus etiquetas de interés puede ir a <A href={`${ORGANIZATION_URL}/userprofile`}>su perfil</A> y cambiar sus configuraciones de notificación.
+            Usted está recibiendo esta notificación ya que su perfil está configurado para recibir un correo cada vez que se publica un proyecto con etiquetas de su interés o por estar suscripto al diputado autor del proyecto. Para desactivar este tipo de notificaciones o cambiar sus etiquetas de interés, ingrese a <A href={`${ORGANIZATION_URL}/userprofile`}>su perfil</A>.
             </Span>
           </em>
         </Item>

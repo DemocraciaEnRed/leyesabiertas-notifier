@@ -46,12 +46,12 @@ const commentContribution = (info) => {
 
 const documentPublished = (info) => {
   const template = buildTemplate('document-published', info)
-  execute(info.user.email, '¡Proyecto publicado!', template)
+  execute(info.user.email, '¡Nuevo proyecto publicado en Leyes Abiertas!', template)
 }
 
 const documentPopular = (info) => {
   const template = buildTemplate('document-popular', info)
-  execute(info.user.email, '¡Un proyecto esta volviendose popular!', template)
+  execute(info.user.email, '¡Un proyecto está volviendose popular!', template)
 }
 
 const apoyoValidacion = (info) => {
