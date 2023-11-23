@@ -21,27 +21,27 @@ const buildTemplate = (fileName, props) => {
 
 const commentNew = (info) => {
   const template = buildTemplate('comment-new', info)
-  execute(info.authorDocument, 'Ha recibido un nuevo comentario', template)
+  execute(info.authorDocument, 'Ha recibido un nuevo comentario en su proyecto de Leyes Abiertas', template)
 }
 
 const commentResolved = (info) => {
   const template = buildTemplate('comment-resolved', info)
-  execute(info.author.email, 'Su comentario ha sido marcado como resuelto', template)
+  execute(info.author.email, 'Su comentario en un proyecto de Leyes Abiertas ha sido marcado como resuelto', template)
 }
 
 const commentLiked = (info) => {
   const template = buildTemplate('comment-liked', info)
-  execute(info.author.email, 'Su comentario ha sido marcado como relevante', template)
+  execute(info.author.email, 'Su comentario en un proyecto de Leyes Abiertas ha sido marcado como relevante', template)
 }
 
 const commentReplied = (info) => {
   const template = buildTemplate('comment-replied', info)
-  execute(info.author.email, 'Su comentario recibio una respuesta', template)
+  execute(info.author.email, 'Su comentario en un proyecto de Leyes Abiertas recibió una respuesta', template)
 }
 
 const commentContribution = (info) => {
   const template = buildTemplate('comment-contribution', info)
-  execute(info.author.email, 'Su comentario ha sido marcado como aporte', template)
+  execute(info.author.email, 'Su comentario en un proyecto de Leyes Abiertas ha sido marcado como aporte', template)
 }
 
 const documentPublished = (info) => {
@@ -51,7 +51,7 @@ const documentPublished = (info) => {
 
 const documentPopular = (info) => {
   const template = buildTemplate('document-popular', info)
-  execute(info.user.email, 'Un proyecto está volviendose popular', template)
+  execute(info.user.email, 'Un proyecto en Leyes Abiertas está volviendose popular', template)
 }
 
 const apoyoValidacion = (info) => {
