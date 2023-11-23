@@ -1,4 +1,4 @@
-const { ObjectID } = require('mongodb')
+const { ObjectId } = require('mongodb')
 const mailer = require('../../../services/nodemailer')
 const mongo = require('../../../services/db')
 const {
@@ -13,6 +13,11 @@ const {
   NODEMAILER_SECURE
 } = process.env
 const basePath = NODE_ENV === 'production' ? '../../../dist/templates' : '../../../templates'
+const limiter = require('../../../services/bottleneck')
+
+function log (message) {
+  console.log('jobs/document-closes.js: ' + message)
+}
 
 function arrayUnique (array) {
   let a = array.concat()
@@ -36,7 +41,7 @@ module.exports = (agenda) => {
     const document = job.attrs.data
 
     let documentInfo = await mongo.getDB().collection('documents').aggregate([
-      { $match: { _id: ObjectID(document.id) } },
+      { $match: { _id: ObjectId(document.id) } },
       {
         $lookup: {
           from: 'users',
@@ -66,8 +71,12 @@ module.exports = (agenda) => {
 
     documentInfo = documentInfo[0]
 
+    const commentsCount = await mongo.getDB().collection('comments').countDocuments({ document: documentInfo._id, field: 'fundation' })
+    const aportesCount = await mongo.getDB().collection('comments').countDocuments({ document: documentInfo._id, field: 'articles' })
+    const apoyosCount = documentInfo.apoyos ? documentInfo.apoyos.length : 0
+
     const emailsWhoCommentedResults = await mongo.getDB().collection('comments').aggregate([
-      { $match: { document: ObjectID(document.id) } },
+      { $match: { document: ObjectId(document.id) } },
       {
         $lookup: {
           from: 'users',
@@ -123,18 +132,40 @@ module.exports = (agenda) => {
       }
     ]).toArray()
     // Deconstruct emails
-    let emailsWhoLiked = emailsWhoLikedResults.map((user) => {
+    const emailsWhoLiked = emailsWhoLikedResults.map((user) => {
       return user.email
     })
+
+    // Now the people who supported the document
+    const emailsWhoSupportedResults = await mongo.getDB().collection('documents').find({ _id: ObjectId(document.id) }, { projection: { apoyos: 1 } }).toArray()
+    const emailsWhoSupported = []
+
+    for (let i = 0; i < emailsWhoSupportedResults[0].apoyos.length; i++) {
+      const apoyo = emailsWhoSupportedResults[0].apoyos[i]
+      if (apoyo.userId) {
+        const emailUser = await mongo.getDB().collection('users').find({ _id: ObjectId(apoyo.userId) }, { projection: { email: 1 } }).toArray()
+        emailsWhoSupported.push(emailUser[0].email)
+      }
+      if (apoyo.email) {
+        emailsWhoSupported.push(apoyo.email)
+      }
+    }
     // -----------
     // Merge Emails
-    let emailsToSend = arrayUnique(emailsWhoCommented.concat(emailsWhoLiked))
+    const emailsToSend = arrayUnique(emailsWhoCommented.concat(emailsWhoLiked).concat(emailsWhoSupported))
+    log(`Found ${emailsWhoCommented.length} emails from comments`)
+    log(`Found ${emailsWhoLiked.length} emails from likes`)
+    log(`Found ${emailsWhoSupported.length} emails from supports`)
+    log(`Found ${emailsToSend.length} UNIQUE emails to send`)
+
     let emailProps = {
       document: {
         id: documentInfo._id,
         title: documentInfo.currentVersion[0].content.title,
         imageCover: documentInfo.currentVersion[0].content.imageCover,
-        commentsCount: documentInfo.commentsCount
+        commentsCount,
+        aportesCount,
+        apoyosCount
       },
       author: {
         id: documentInfo.author[0]._id,
@@ -154,24 +185,26 @@ module.exports = (agenda) => {
       config.secure = false
       config.ignoreTLS = true
     }
+
     const template = buildTemplate('comment-closed', emailProps)
-    let i, j
-    for (i = 0, j = emailsToSend.length; i < j; i += BULK_EMAIL_CHUNK_SIZE) {
-      let emailsFor = emailsToSend.slice(i, i + BULK_EMAIL_CHUNK_SIZE)
+
+    for (let i = 0; i < emailsToSend.length; i++) {
       let emailOptions = {
         from: `"${ORGANIZATION_NAME}" <${ORGANIZATION_EMAIL}>`, // sender address
-        bcc: emailsFor, // list of receivers
-        subject: '¡Proyecto cerrado!', // Subject line
+        to: emailsToSend[i], // to
+        subject: 'Cierre de aportes y comentarios en un proyecto de Leyes Abiertas', // Subject line
         html: template // html body
       }
+
       // agenda.now('send-email', emailOptions)
       mailer.sendEmail(config, emailOptions, function (err) {
         if (err) {
-          console.log('Sending failed: ' + err)
+          log('Sending failed: ' + err)
         } else {
-          console.log('Sent')
+          log('Sent')
         }
       })
+
       // notifications.sendClosingEmail()
     }
     done()

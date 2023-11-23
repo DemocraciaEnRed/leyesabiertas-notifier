@@ -9,12 +9,12 @@ const { ORGANIZATION_NAME, ORGANIZATION_URL, ORGANIZATION_API_URL } = process.en
 
 const CommentLiked = (props) => {
   return (
-    <Email title='Tu comentario fue marcado como relevante' style={{ width: '100%', maxWidth: '700px' }}>
+    <Email title='Su comentario ha sido marcado como relevante' style={{ width: '100%', maxWidth: '700px' }}>
       <MailHeader />
       <Content name={props.author.name} style={{ width: '100%' }}>
         <Item style={Style.itemStyle}>
           <Span {...Style.defaultContentStyle}>
-          El/la diputado/a apoyó el comentario que realizó en el proyecto <b>{props.document.title}</b> en <A href={`${ORGANIZATION_URL}/propuesta?id=${props.document.id}`}>{ORGANIZATION_NAME}</A>
+          Recibiste el apoyó del diputado autor/a de su comentario realizado en el proyecto <b>{props.document.title}</b> en el <A href={`${ORGANIZATION_URL}/propuesta?id=${props.document.id}`}>Portal de Leyes Abiertas</A>
           </Span>
         </Item>
         <Item style={Style.itemStyle}>

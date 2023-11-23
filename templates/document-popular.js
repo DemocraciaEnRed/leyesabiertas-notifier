@@ -4,7 +4,9 @@ const MailHeader = require('./header')
 const MailFooter = require('./footer')
 const Content = require('./content')
 const Style = require('./styles')
-const { ORGANIZATION_NAME, ORGANIZATION_URL, ORGANIZATION_API_URL } = process.env
+// const CommentContainerStyle = require('./commentContainerStyle')
+// const { ORGANIZATION_NAME, ORGANIZATION_URL, ORGANIZATION_API_URL } = process.env
+const { ORGANIZATION_URL, ORGANIZATION_API_URL } = process.env
 
 const cardStyle = {
   width: '80%',
@@ -77,14 +79,15 @@ function getImageStyle (imgUrl) {
 
 const titleStyle = { fontSize: 24, fontWeight: 'bold', lineHeight: 'normal' }
 
-const CommentClosed = (props) => {
+const DocumentPopular = (props) => {
   return (
-    <Email title='Cierre para aportes y comentarios en un proyecto de Leyes Abiertas' style={{ width: '100%', maxWidth: '700px' }}>
+    <Email title='Un proyecto está volviendose popular' style={{ width: '100%', maxWidth: '700px' }}>
       <MailHeader />
-      <Content showName={false} style={{ width: '100%' }}>
+      <Content name={props.user.name} style={{ width: '100%' }}>
+
         <Item style={Style.itemStyle}>
           <Span {...Style.defaultContentStyle}>
-          Le informamos que el proyecto <b>{props.document.title}</b> en la que participó ha finalizado su periodo para realizar aportes. Ingrese en el <A href={ORGANIZATION_URL}>Portal de Leyes Abiertas</A> para ver la versión final y los resultados de la participación.
+          Le informamos que el proyecto <b>"<A href={`${ORGANIZATION_URL}/propuesta?id=${props.document.id}`}>{props.document.title}</A>"</b> de <b>{props.author.fullname}</b> se ha vuelto popular debido a la participación activa de los usuarios. Le invitamos a ver y participar del mismo.
           </Span>
         </Item>
         <Item style={Style.itemStyle}>
@@ -132,13 +135,15 @@ const CommentClosed = (props) => {
         <Item style={Style.itemStyle}>
           <em>
             <Span {...Style.smallContentStyle}>
-            Está recibiendo este correo porque ha participado anteriormente en esta propuesta con un comentario, apoyo o aporte. No es posible desactivar esta notificación desde su perfil.</Span>
+            Usted está recibiendo esta notificación ya que su perfil está configurado para recibir un correo cada vez que un proyecto se vuelva popular. Para desactivar este tipo de notificaciones puede hacerlo desde <A href={`${ORGANIZATION_URL}/userprofile`}>su perfil</A> cambiando su configuración de notificaciones.
+            </Span>
           </em>
         </Item>
+
       </Content>
       <MailFooter />
     </Email>
   )
 }
 
-module.exports = (props) => renderEmail(<CommentClosed {...props} />)
+module.exports = (props) => renderEmail(<DocumentPopular {...props} />)

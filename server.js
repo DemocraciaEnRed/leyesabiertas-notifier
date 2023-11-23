@@ -1,3 +1,4 @@
+require('dotenv').config()
 const http = require('http')
 const app = require('./app')
 const mongo = require('./services/db')

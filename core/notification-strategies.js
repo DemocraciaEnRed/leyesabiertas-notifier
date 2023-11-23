@@ -21,37 +21,42 @@ const buildTemplate = (fileName, props) => {
 
 const commentNew = (info) => {
   const template = buildTemplate('comment-new', info)
-  execute(info.authorDocument, '¡Comentario nuevo!', template)
+  execute(info.authorDocument, 'Ha recibido un nuevo comentario en su proyecto de Leyes Abiertas', template)
 }
 
 const commentResolved = (info) => {
   const template = buildTemplate('comment-resolved', info)
-  execute(info.author.email, '¡Comentario resuelto!', template)
+  execute(info.author.email, 'Su comentario en un proyecto de Leyes Abiertas ha sido marcado como resuelto', template)
 }
 
 const commentLiked = (info) => {
   const template = buildTemplate('comment-liked', info)
-  execute(info.author.email, '¡Comentario relevante!', template)
+  execute(info.author.email, 'Su comentario en un proyecto de Leyes Abiertas ha sido marcado como relevante', template)
 }
 
 const commentReplied = (info) => {
   const template = buildTemplate('comment-replied', info)
-  execute(info.author.email, '¡Comentario respondido!', template)
+  execute(info.author.email, 'Su comentario en un proyecto de Leyes Abiertas recibió una respuesta', template)
 }
 
 const commentContribution = (info) => {
   const template = buildTemplate('comment-contribution', info)
-  execute(info.author.email, '¡Comentario marcado como aporte!', template)
+  execute(info.author.email, 'Su comentario en un proyecto de Leyes Abiertas ha sido marcado como aporte', template)
 }
 
 const documentPublished = (info) => {
   const template = buildTemplate('document-published', info)
-  execute(info.user.email, '¡Proyecto publicado!', template)
+  execute(info.user.email, 'Nuevo proyecto publicado en Leyes Abiertas', template)
+}
+
+const documentPopular = (info) => {
+  const template = buildTemplate('document-popular', info)
+  execute(info.user.email, 'Un proyecto en Leyes Abiertas está volviendose popular', template)
 }
 
 const apoyoValidacion = (info) => {
   const template = buildTemplate('apoyo-validacion', info)
-  execute(info.user.email, '¡Último paso para apoyar el proyecto de Leyes Abiertas!', template)
+  execute(info.user.email, '¡Último paso para apoyar el proyecto en Leyes Abiertas!', template)
 }
 
 const strategies = [
@@ -61,6 +66,7 @@ const strategies = [
   ['comment-replied', commentReplied],
   ['comment-contribution', commentContribution],
   ['document-published', documentPublished],
+  ['document-popular', documentPopular],
   ['apoyo-validacion', apoyoValidacion]
 ]
 

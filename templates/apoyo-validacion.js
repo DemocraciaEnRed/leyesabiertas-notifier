@@ -11,7 +11,7 @@ const ApoyoValidacion = (props) => {
   const { documentTitle, token } = props
   const validationUrl = `${ORGANIZATION_URL}/validar-apoyo?v=${token.token}`
   return (
-    <Email title='Validación de apoyo' style={{ width: '100%', maxWidth: '700px' }}>
+    <Email title='Cierre de aportes y comentarios en un proyecto de Leyes Abiertas' style={{ width: '100%', maxWidth: '700px' }}>
       <MailHeader />
       <Content name={token.nombreApellido} showName={true} style={{ width: '100%' }}>
 
@@ -25,7 +25,13 @@ const ApoyoValidacion = (props) => {
             Por favor, ingrese en <A href={validationUrl}>este link</A> para validar su apoyo.
           </Span>
         </Item>
-
+        <Item style={Style.itemStyle}>
+          <em>
+            <Span {...Style.smallContentStyle}>
+            Si usted no ha apoyado este proyecto, por favor ignore este correo.
+            </Span>
+          </em>
+        </Item>
       </Content>
       <MailFooter />
     </Email>
