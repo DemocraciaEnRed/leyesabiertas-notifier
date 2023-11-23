@@ -9,12 +9,12 @@ const { ORGANIZATION_NAME, ORGANIZATION_URL, ORGANIZATION_API_URL } = process.en
 
 const CommentRead = (props) => {
   return (
-    <Email title='Comentario resuelto' style={{ width: '100%', maxWidth: '700px' }}>
+    <Email title='Ha recibido un nuevo comentario en su proyecto de Leyes Abiertas' style={{ width: '100%', maxWidth: '700px' }}>
       <MailHeader />
       <Content name={props.author.name} style={{ width: '100%' }}>
         <Item style={Style.itemStyle}>
           <Span {...Style.defaultContentStyle}>
-          Hay un nuevo comentario en su proyecto <b>{props.document.title}</b> en <A href={`${ORGANIZATION_URL}/propuesta?id=${props.document.id}`}>{ORGANIZATION_NAME}</A>
+          Hay un nuevo comentario en el proyecto <b>{props.document.title}</b> en el <A href={`${ORGANIZATION_URL}/propuesta?id=${props.document.id}`}>Portal de Leyes Abiertas</A>
           </Span>
         </Item>
         <Item style={Style.itemStyle}>
@@ -44,7 +44,7 @@ const CommentRead = (props) => {
         <Item style={Style.itemStyle}>
           <em>
             <Span {...Style.smallContentStyle}>
-              Recibirá una notificación cada vez que un usuario participe en un proyecto de su autoría
+              Recibirá una notificación cada vez que un usuario participe en un proyecto de su autoría.
             </Span>
           </em>
         </Item>

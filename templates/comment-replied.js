@@ -9,12 +9,12 @@ const { ORGANIZATION_NAME, ORGANIZATION_URL, ORGANIZATION_API_URL } = process.en
 
 const CommentRead = (props) => {
   return (
-    <Email title='Comentario resuelto' style={{ width: '100%', maxWidth: '700px' }}>
+    <Email title='Su comentario recibio una respuesta' style={{ width: '100%', maxWidth: '700px' }}>
       <MailHeader />
       <Content name={props.author.name} style={{ width: '100%' }}>
         <Item style={Style.itemStyle}>
           <Span {...Style.defaultContentStyle}>
-            El/la diputado/a respondió a su comentario en el proyecto <b>{props.document.title}</b> en <A href={`${ORGANIZATION_URL}/propuesta?id=${props.document.id}`}>{ORGANIZATION_NAME}</A>
+            El diputado autor/a respondió a su comentario en el proyecto <b>{props.document.title}</b> en el <A href={`${ORGANIZATION_URL}/propuesta?id=${props.document.id}`}>Portal de Leyes Abiertas</A>
           </Span>
         </Item>
         <Item style={Style.itemStyle}>
@@ -46,6 +46,12 @@ const CommentRead = (props) => {
               </Item>
             </Box>
           </A>
+        </Item>
+        <Item style={Style.itemStyle}>
+          <em>
+            <Span {...Style.smallContentStyle}>
+            Está recibiendo este correo porque ha participado anteriormente en esta propuesta con un comentario, apoyo o aporte. No es posible desactivar esta notificación desde su perfil.</Span>
+          </em>
         </Item>
       </Content>
       <MailFooter />

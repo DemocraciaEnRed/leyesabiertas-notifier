@@ -81,13 +81,13 @@ const titleStyle = { fontSize: 24, fontWeight: 'bold', lineHeight: 'normal' }
 
 const DocumentPopular = (props) => {
   return (
-    <Email title='Un proyecto está volviendose popular!' style={{ width: '100%', maxWidth: '700px' }}>
+    <Email title='Un proyecto está volviendose popular' style={{ width: '100%', maxWidth: '700px' }}>
       <MailHeader />
       <Content name={props.user.name} style={{ width: '100%' }}>
 
         <Item style={Style.itemStyle}>
           <Span {...Style.defaultContentStyle}>
-          Le informamos que la propuesta <b>"<A href={`${ORGANIZATION_URL}/propuesta?id=${props.document.id}`}>{props.document.title}</A>"</b> de <b>{props.author.fullname}</b> se ha vuelto popular debido a la participación activa de los usuarios. Le invitamos a ver y participar del mismo.
+          Le informamos que el proyecto <b>"<A href={`${ORGANIZATION_URL}/propuesta?id=${props.document.id}`}>{props.document.title}</A>"</b> de <b>{props.author.fullname}</b> se ha vuelto popular debido a la participación activa de los usuarios. Le invitamos a ver y participar del mismo.
           </Span>
         </Item>
         <Item style={Style.itemStyle}>
@@ -135,7 +135,7 @@ const DocumentPopular = (props) => {
         <Item style={Style.itemStyle}>
           <em>
             <Span {...Style.smallContentStyle}>
-              Usted está recibiendo esta notificación ya que su perfil está configurado para recibir un correo cada vez que un proyecto se vuelva popular. Para desactivar este tipo de notificaciones o cambiar sus etiquetas de interés puede hacerlo desde <A href={`${ORGANIZATION_URL}/userprofile`}>su perfil</A>, cambiando sus configuraciones de notificaciones.
+            Usted está recibiendo esta notificación ya que su perfil está configurado para recibir un correo cada vez que un proyecto se vuelva popular. Para desactivar este tipo de notificaciones puede hacerlo desde <A href={`${ORGANIZATION_URL}/userprofile`}>su perfil</A> cambiando su configuración de notificaciones.
             </Span>
           </em>
         </Item>

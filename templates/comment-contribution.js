@@ -9,17 +9,17 @@ const { ORGANIZATION_NAME, ORGANIZATION_URL, ORGANIZATION_API_URL } = process.en
 
 const CommentContribution = (props) => {
   return (
-    <Email title='Gracias por su aporte' style={{ width: '100%', maxWidth: '700px' }}>
+    <Email title='Su comentario ha sido marcado como aporte' style={{ width: '100%', maxWidth: '700px' }}>
       <MailHeader />
       <Content name={props.author.name} style={{ width: '100%' }}>
         <Item style={Style.itemStyle}>
           <Span {...Style.defaultContentStyle}>
-          El/la diputado/a creó un nueva versión de la propuesta <b>{props.document.title}</b> y destacó su comentario como aporte. Para ver la nueva versión ingrese en <A href={`${ORGANIZATION_URL}/propuesta?id=${props.document.id}`}>{ORGANIZATION_NAME}</A>
+          El diputado autor/a creó un nueva versión del proyecto <b>{props.document.title}</b> y destacó su comentario como aporte. Para ver la nueva versión ingrese en <A href={`${ORGANIZATION_URL}/propuesta?id=${props.document.id}`}>{ORGANIZATION_NAME}</A>
           </Span>
         </Item>
         <Item style={Style.itemStyle}>
           <Span {...Style.defaultContentStyle}>
-          Este fue tú comentario:
+          Este fue su comentario:
           </Span>
         </Item>
         <Item style={Style.itemStyle}>
@@ -49,8 +49,7 @@ const CommentContribution = (props) => {
         <Item style={Style.itemStyle}>
           <em>
             <Span {...Style.smallContentStyle}>
-              Recibirá una notificación cada vez que un usuario participe en un proyecto de su autoría
-            </Span>
+            Está recibiendo este correo porque ha participado anteriormente en esta propuesta con un comentario, apoyo o aporte. No es posible desactivar esta notificación desde su perfil.</Span>
           </em>
         </Item>
       </Content>

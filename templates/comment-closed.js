@@ -79,12 +79,12 @@ const titleStyle = { fontSize: 24, fontWeight: 'bold', lineHeight: 'normal' }
 
 const CommentClosed = (props) => {
   return (
-    <Email title='Cierre de comentarios' style={{ width: '100%', maxWidth: '700px' }}>
+    <Email title='Cierre para aportes y comentarios en un proyecto de Leyes Abiertas' style={{ width: '100%', maxWidth: '700px' }}>
       <MailHeader />
       <Content showName={false} style={{ width: '100%' }}>
         <Item style={Style.itemStyle}>
           <Span {...Style.defaultContentStyle}>
-          Le informamos que la propuesta <b>{props.document.title}</b> en la que participó ha finalizado su periodo para realizar aportes. Ingrese en <A href={ORGANIZATION_URL}>{ORGANIZATION_NAME}</A> para ver la versión final y los resultados de la participación.
+          Le informamos que el proyecto <b>{props.document.title}</b> en la que participó ha finalizado su periodo para realizar aportes. Ingrese en el <A href={ORGANIZATION_URL}>Portal de Leyes Abiertas</A> para ver la versión final y los resultados de la participación.
           </Span>
         </Item>
         <Item style={Style.itemStyle}>

@@ -192,7 +192,7 @@ module.exports = (agenda) => {
       let emailOptions = {
         from: `"${ORGANIZATION_NAME}" <${ORGANIZATION_EMAIL}>`, // sender address
         to: emailsToSend[i], // to
-        subject: '¡Proyecto cerrado!', // Subject line
+        subject: 'Cierre de aportes y comentarios en un proyecto de Leyes Abiertas', // Subject line
         html: template // html body
       }
 
